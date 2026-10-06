@@ -163,14 +163,26 @@ def simulated_annealing(problem, start_board):
     This can help escape local minima.
     """
 
-    current = start_board
+    current = start_board.copy()
+    current_cost = count_conflicts(current)
 
     temperature = 10.0
     cooling_rate = 0.95
 
-    # TODO
+    while temperature > 0.001 and current_cost > 0:
+        actions = problem.actions(current)
+        if not actions:
+            break
+        candidate = problem.result(current, random.choice(actions))
+        candidate_cost = count_conflicts(candidate)
+        delta = candidate_cost - current_cost
 
-    pass
+        if delta <= 0 or random.random() < math.exp(-delta / temperature):
+            current, current_cost = candidate, candidate_cost
+
+        temperature *= cooling_rate
+
+    return current
 
 
 # --------------------------------------------------
