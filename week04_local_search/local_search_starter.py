@@ -97,15 +97,10 @@ def generate_neighbours(problem, board):
         problem.result(state, action)
     """
 
-    neighbours = []
-
-    # TODO:
-    #
-    # 1. Ask the problem for the available actions.
-    # 2. Apply each action.
-    # 3. Add the resulting state to neighbours.
-
-    return neighbours
+    return [
+        problem.result(board, action)
+        for action in problem.actions(board)
+    ]
 
 
 # --------------------------------------------------
