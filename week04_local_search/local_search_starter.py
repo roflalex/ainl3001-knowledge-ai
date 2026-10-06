@@ -132,11 +132,20 @@ def hill_climbing(problem, start_board):
         return current
     """
 
-    current = start_board
+    current = start_board.copy()
+    current_cost = count_conflicts(current)
 
-    # TODO
+    while current_cost > 0:
+        neighbours = generate_neighbours(problem, current)
+        if not neighbours:
+            break
+        best = min(neighbours, key=count_conflicts)
+        best_cost = count_conflicts(best)
+        if best_cost >= current_cost:
+            break
+        current, current_cost = best, best_cost
 
-    pass
+    return current
 
 
 # --------------------------------------------------
