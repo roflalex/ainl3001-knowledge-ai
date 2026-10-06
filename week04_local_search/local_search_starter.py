@@ -36,7 +36,7 @@ from queens_problem import QueensProblem
 N = 8
 
 
-# --------------------------------------------------
+
 # TASK 0 — UNDERSTANDING THE STATE
 # --------------------------------------------------
 
@@ -50,7 +50,8 @@ print(
 )
 
 print(
-    "Each value represents the row containing the queen."
+   
+ "Each value represents the row containing the queen."
 )
 
 print(
@@ -224,3 +225,9 @@ if __name__ == "__main__":
     print(
         f"{len(neighbours)} neighbours generated"
     )
+
+    for algorithm in (hill_climbing, simulated_annealing):
+        final_board = algorithm(problem, board)
+        print(f"\n{algorithm.__name__}")
+        print(final_board)
+        print(f"Final cost: {count_conflicts(final_board)}")

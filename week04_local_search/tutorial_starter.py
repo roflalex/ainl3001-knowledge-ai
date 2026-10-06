@@ -142,9 +142,10 @@ print(
 Be ready to discuss:
 
 1. What information is stored in problem.initial?
+    a: initial holds the starting state of the problem. The class stores it and doesnt say what type it is
 
 2. What information is stored in problem.goal?
-
+    a: goal holds the target state that the search is trying to reach
 3. What is the difference between:
 
        problem.actions(state)
@@ -153,10 +154,18 @@ Be ready to discuss:
 
        problem.result(state, action)
 
+    a: .actions tells you what you can do from a state  
+       .result tells you what happens if you do one of those things
 4. Why doesn't Problem know anything about grids?
+    a: Problem is a template for any searhc proble, so it only defines:
+        initial state, goal, actions,result and goal_test
 
 5. Why doesn't GridProblem know anything about search?
+    a: GridProblem only defines the grid, initial state, the goal, legal moves and what each moves does 
+       it says nothing about how to find a solution
 
 6. Could the same Problem structure be used for something
    other than a grid?
+    a: Anything that has states, moves between them and 
+    a way to tell you've finished can use the structure
 """
