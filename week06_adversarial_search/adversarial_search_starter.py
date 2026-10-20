@@ -67,8 +67,11 @@ def print_board(state):
 
 def available_moves(state):
     """Return indices of empty cells (0 through 8)."""
-    # TODO: Find every position containing " ".
-    pass
+    moves = []
+    for i in range(len(state)):
+        if state[i] == "":
+            moves.append(i)
+    return moves
 
 
 # --------------------------------------------------
@@ -78,10 +81,10 @@ def available_moves(state):
 def make_move(state, move, player):
     """Return a NEW board with player ('X' or 'O') at move.
 
-    Assume move is legal. Do not modify the input board.
-    """
-    # TODO: Copy the board and place the player's mark.
-    pass
+    Assume move is legal. Do not modify the input board."""
+    new_state = state.copy()
+    new_state[move] = player
+    return new_state
 
 
 # --------------------------------------------------
