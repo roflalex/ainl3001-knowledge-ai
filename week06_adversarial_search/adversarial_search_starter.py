@@ -257,7 +257,7 @@ def best_move_alpha_beta(state, counter):
         child = make_move(state,move,"X")
         score = alpha_beta(child,False,alpha,beta,counter)
         if score > best_score:
-            best_score = score:
+            best_score = score
             chosen_move = move
         if best_score > alpha:
             alpha = best_score
