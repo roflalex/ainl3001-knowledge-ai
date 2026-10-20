@@ -53,8 +53,12 @@ WINNING_LINES = [
 
 def print_board(state):
     """Display the nine cells as a 3-by-3 board."""
-    # TODO: Print three rows of three cells.
-    pass
+    for row in range(3):
+        cells = state[row * 3 : row * 3 + 3]
+        print(" " + " | ".join(cells))
+        if row < 2:
+            print("---+---+---")
+
 
 
 # --------------------------------------------------
