@@ -203,9 +203,38 @@ def alpha_beta(state, maximizing, alpha, beta, counter):
     # - MAX updates alpha; MIN updates beta.
     # - Stop exploring remaining moves if alpha >= beta.
     # - Count visited nodes exactly as in minimax().
-    pass
+    
+    counter["nodes"] += 1
 
+    if is_terminal(state):
+        return utility(state)
 
+    if maximizing:
+        best_score = -2
+        for move in available_moves(state):
+            child = make_move(state,move,"X")
+            score = alpha_beta(child,False,alpha,beta,counter)
+
+            if score > best_score:
+                best_score = score
+            if best_score > alpha:
+                alpha = best_score
+            if alpha >= beta:
+                break
+        return best_score
+    else:
+        best_score = 2
+        for move in available_moves(state):
+            child = make_move(state,move,"O")
+            score = alpha_beta(child,True,alpha,beta,counter)
+
+            if score < best_score:
+                best_score = score
+            if best_score < beta:
+                beta = best_score
+            if alpha >= beta:
+                break
+        return best_score
 # --------------------------------------------------
 # TASK 6 — BEST MOVE WITH ALPHA-BETA
 # --------------------------------------------------
@@ -215,8 +244,24 @@ def best_move_alpha_beta(state, counter):
     # TODO: Like best_move(), but call alpha_beta().
     # Start alpha at -infinity and beta at +infinity.
     # Update alpha after each candidate X move.
-    pass
+    
+    if is_terminal(state):
+        return None
 
+    alpha = float("-inf")
+    beta = float("inf")
+    best_score = float("-inf")
+    chosen_move = None
+
+    for move in available_moves(state):
+        child = make_move(state,move,"X")
+        score = alpha_beta(child,False,alpha,beta,counter)
+        if score > best_score:
+            best_score = score:
+            chosen_move = move
+        if best_score > alpha:
+            alpha = best_score
+    return chosen_move
 
 # --------------------------------------------------
 # TESTING — RUN PYTHON FILE IN VS CODE
