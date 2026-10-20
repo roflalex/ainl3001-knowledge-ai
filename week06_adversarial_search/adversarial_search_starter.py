@@ -142,9 +142,26 @@ def minimax(state, maximizing, counter):
     # 3. For X (MAX), recursively choose the highest score.
     # 4. For O (MIN), recursively choose the lowest score.
     # Use make_move() to avoid changing the original board.
-    pass
+    
+    if is_terminal(state):
+        return utility(state)
 
-
+    if maximizing:
+        best_score = -2
+        for move in available_moves(state):
+            child = make_move(state,move,"X")
+            score = minimax(child,False,counter)
+            if score > best_score:
+                best_score = score
+        return best_score
+    else:
+        best_score = 2
+        for move in available_moves(state):
+            child = make_move(state,move,"O")
+            score = minimax(child,True, counter)
+            if score < best_score:
+                best_score = score
+        return best_score
 # --------------------------------------------------
 # TASK 4 AND 5 — BEST MOVE
 # --------------------------------------------------
@@ -159,6 +176,18 @@ def best_move(state, counter):
     # If the board is terminal, return None.
     pass
 
+    if is_terminal(state):
+        return None
+
+    best_score = -2
+    chosen_move = None
+    for move in available_moves(state):
+        child = make_move(state,move,"X")
+        score = minimax(child,False,counter)
+        if score > best_score:
+            best_score = score
+            chosen_move = move
+    return chosen_move
 
 # --------------------------------------------------
 # TASK 6 — ALPHA-BETA PRUNING
